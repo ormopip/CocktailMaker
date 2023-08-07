@@ -13,5 +13,6 @@ fun NavigationGraph() {
         startDestination = Screen.IngredientListScreen.route,
     ) {
         addIngredientListScreen(navController)
+        addIngredientDetailScreen()
     }
 }

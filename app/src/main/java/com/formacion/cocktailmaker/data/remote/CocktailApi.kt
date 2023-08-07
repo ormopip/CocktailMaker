@@ -1,13 +1,18 @@
 package com.formacion.cocktailmaker.data.remote
 
+import com.formacion.cocktailmaker.data.remote.dto.IngredientArrayDto
 import com.formacion.cocktailmaker.data.remote.dto.IngredientDto
 import retrofit2.http.GET
-import retrofit2.http.Headers
+import retrofit2.http.Query
 
 //www.thecocktaildb.com/api/json/v1/1/list.php?i=list
 
 interface CocktailApi {
-    @GET("api/json/v1/1/list.php")
-    @Headers("")
-    suspend fun getIngredientList(): List<IngredientDto>
+
+    @GET("list.php")
+    suspend fun getIngredientList(@Query("i") query: String): IngredientArrayDto
+
+/*    @POST("api/heros/all")
+    @Headers("Authorization: Bearer $TOKEN")
+    suspend fun getIngredientList(@Body searchDto: SearchDto): List<IngredientDto>*/
 }

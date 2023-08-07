@@ -65,7 +65,7 @@ fun ShowIngredient(
                 placeholder = painterResource(id = R.drawable.ball),
                 error = painterResource(id = R.drawable.ball),
                 model = ImageRequest.Builder(LocalContext.current)
-                    .data(ingredient.photoUrl)
+                    .data("https://www.thecocktaildb.com/images/ingredients/${ingredient.id}-Small.png")
                     .build(), contentDescription = ""
             )
             Row(
@@ -77,13 +77,8 @@ fun ShowIngredient(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = ingredient.name,
+                        text = ingredient.id,
                         maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                    Text(
-                        text = ingredient.description,
-                        maxLines = 4,
                         overflow = TextOverflow.Ellipsis
                     )
                 }
@@ -114,7 +109,7 @@ fun ShowIngredient(
 @Preview
 fun ShowIngredientPreview() {
     ShowIngredient(
-        IngredientModel("dsfdf", "sdfsdf" , "sdfsdf", "sdfsdf")
+        IngredientModel("dsfdf")
     ) {
         // Nothing todo here
     }

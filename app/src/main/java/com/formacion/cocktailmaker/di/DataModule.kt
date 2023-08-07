@@ -24,7 +24,8 @@ val dataModule = module {
 
     single<Retrofit> {
         Retrofit.Builder()
-            .baseUrl("http://www.thecocktaildb.com/")
+            .baseUrl("https://www.thecocktaildb.com/api/json/v1/1/")
+            //.baseUrl("https://dragonball.keepcoding.education/")
             .client(get())
             .addConverterFactory(MoshiConverterFactory.create(get()))
             .build()

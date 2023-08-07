@@ -5,7 +5,4 @@ import com.formacion.cocktailmaker.domain.model.IngredientModel
 
 fun IngredientDto.toIngredientModel() = IngredientModel(
     id = id ?: "",
-    photoUrl = "$name-Small.png" ?: "",
-    name = name ?: "",
-    description = description ?: ""
 )

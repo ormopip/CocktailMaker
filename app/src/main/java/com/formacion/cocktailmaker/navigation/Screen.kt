@@ -12,4 +12,9 @@ sealed class Screen(
         route = "ingredientList",
         arguments = emptyList()
     )
+
+    object IngredientDetailScreen : Screen(
+        route = "ingredientDetail",
+        arguments = emptyList()
+    )
 }

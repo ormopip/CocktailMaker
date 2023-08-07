@@ -21,34 +21,12 @@ fun ShowList(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         items(ingredientList?.size ?: 0) { i ->
-            // Unwrap
             val item = ingredientList?.get(i)
             item?.let { ingredient ->
                 ShowIngredient(ingredient) {
                     onItemClick.invoke(ingredient.id)
                 }
             }
-            /** Versión javera
-            if (item != null) {
-
-            }
-             */
-            /** Versión javera
-            if (item != null) {
-
-            }
-             */
-            /** Versión javera
-            if (item != null) {
-
-            }
-             */
-            /** Versión javera
-            if (item != null) {
-
-            }
-             */
-
         }
     }
 }
