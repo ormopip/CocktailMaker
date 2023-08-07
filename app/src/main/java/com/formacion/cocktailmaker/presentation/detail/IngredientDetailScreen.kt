@@ -1,4 +1,4 @@
-package com.formacion.cocktailmaker.presentation.list
+package com.formacion.cocktailmaker.presentation.detail
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -8,8 +8,8 @@ import androidx.compose.ui.Modifier
 import com.formacion.cocktailmaker.presentation.theme.globalPadding
 
 @Composable
-fun IngredientsListScreen(
-   onItemClick: (String) -> Unit
+fun IngredientsDetailScreen(
+    onItemClick: (String) -> Unit
 ) {
     LazyColumn(
         modifier = Modifier.padding(

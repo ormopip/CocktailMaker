@@ -8,14 +8,10 @@ import androidx.navigation.compose.rememberNavController
 @Composable
 fun NavigationGraph() {
     val navController = rememberNavController()
-
-    //por qué algunos tienen navController y otros no
     NavHost(
         navController = navController,
-        startDestination = Screen.LoginScreen.route,
+        startDestination = Screen.IngredientListScreen.route,
     ) {
-        addLoginScreen(navController)
-        addHeroListScreen(navController)
-        addHeroDetailScreen()
+        addIngredientListScreen(navController)
     }
 }

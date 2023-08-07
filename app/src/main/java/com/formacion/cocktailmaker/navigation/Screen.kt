@@ -8,24 +8,8 @@ sealed class Screen(
     val route: String,
     val arguments: List<NamedNavArgument>
 ) {
-    object LoginScreen: Screen(
-        route = "Login",
+    object IngredientListScreen: Screen(
+        route = "ingredientList",
         arguments = emptyList()
-    )
-
-    object HeroListScreen: Screen(
-        route = "heroList",
-        arguments = emptyList()
-    )
-
-    object HeroDetailScreen: Screen(
-        route = "heroDetail",
-        arguments = listOf(
-            navArgument("heroId") {
-                type = NavType.StringType
-                nullable = false
-            }
-        )
-
     )
 }
