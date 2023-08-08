@@ -1,7 +1,13 @@
 package com.formacion.cocktailmaker.di
 
+import android.content.Context
+import androidx.room.Room
 import com.formacion.cocktailmaker.data.CocktailRepository
 import com.formacion.cocktailmaker.data.CocktailRepositoryImpl
+import com.formacion.cocktailmaker.data.local.CocktailDao
+import com.formacion.cocktailmaker.data.local.CocktailDatabase
+import com.formacion.cocktailmaker.data.local.LocalDataSource
+import com.formacion.cocktailmaker.data.local.LocalDataSourceImpl
 import com.formacion.cocktailmaker.data.remote.CocktailApi
 import com.formacion.cocktailmaker.data.remote.RemoteDataSource
 import com.formacion.cocktailmaker.data.remote.RemoteDataSourceImpl
@@ -25,7 +31,6 @@ val dataModule = module {
     single<Retrofit> {
         Retrofit.Builder()
             .baseUrl("https://www.thecocktaildb.com/api/json/v1/1/")
-            //.baseUrl("https://dragonball.keepcoding.education/")
             .client(get())
             .addConverterFactory(MoshiConverterFactory.create(get()))
             .build()
@@ -41,11 +46,29 @@ val dataModule = module {
 
     single<RemoteDataSource> { RemoteDataSourceImpl(get()) }
 
+    single<LocalDataSource> { LocalDataSourceImpl(get()) }
+
     single<CocktailApi> {
         getCocktailApi(get())
     }
 
+    single {
+        getDatabase(get())
+    }
+
+    single {
+        providesCocktailDao(get())
+    }
 }
 
 private fun getCocktailApi(retrofit: Retrofit) =
     retrofit.create(CocktailApi::class.java)
+
+private fun getDatabase(context: Context) : CocktailDatabase =
+    Room.databaseBuilder(
+        context,
+        CocktailDatabase::class.java, "cocktail-db"
+    ).build()
+
+private fun providesCocktailDao(db: CocktailDatabase) : CocktailDao =
+    db.cocktailDao()

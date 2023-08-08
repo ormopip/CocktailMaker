@@ -1,15 +1,19 @@
 package com.formacion.cocktailmaker.data
 
+import com.formacion.cocktailmaker.DataBuilders.CocktailDataBuilder
+import com.formacion.cocktailmaker.data.local.LocalDataSource
+import com.formacion.cocktailmaker.data.mappers.toCocktailLocal
+import com.formacion.cocktailmaker.data.mappers.toCocktailModel
 import com.formacion.cocktailmaker.data.mappers.toIngredientModel
 import com.formacion.cocktailmaker.data.remote.RemoteDataSource
-import com.formacion.cocktailmaker.data.remote.dto.IngredientDto
+import com.formacion.cocktailmaker.domain.model.CocktailModel
 import com.formacion.cocktailmaker.domain.model.IngredientModel
-import com.formacion.cocktailmaker.navigation.Screen
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class CocktailRepositoryImpl(
-    private val remoteDataSource: RemoteDataSource
+    private val remoteDataSource: RemoteDataSource,
+    private val localDataSource: LocalDataSource
 ) : CocktailRepository {
     override suspend fun getIngredientList(): Flow<List<IngredientModel>> {
         return remoteDataSource.getIngredientList().map {
@@ -18,5 +22,30 @@ class CocktailRepositoryImpl(
             } ?: listOf(IngredientModel("sdfsdf"))
         }
     }
+
+    override suspend fun getRandomCocktail(): Flow<CocktailModel> {
+        return remoteDataSource.getRandomCocktail().map {
+            it?.cocktailList?.first()?.toCocktailModel()?: CocktailDataBuilder().buildSingle()
+            }
+        }
+
+    override suspend fun getFavorites(): Flow<List<CocktailModel>> {
+        return localDataSource.getFavorites().map { cocktailList ->
+            cocktailList.map {
+                it.toCocktailModel()
+            }
+        }
+    }
+
+    override suspend fun insertFavorite(cocktailModel: CocktailModel) {
+        localDataSource.insertCocktail(cocktailModel.toCocktailLocal())
+    }
+
+    override suspend fun deleteFavorite(cocktailModel: CocktailModel) {
+        localDataSource.deleteFavorite(cocktailModel.toCocktailLocal())
+    }
 }
+
+
+
 
