@@ -1,5 +1,7 @@
 package com.formacion.cocktailmaker.presentation.favoritecocktails
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.formacion.cocktailmaker.domain.usecase.GetFavoriteCocktailListUseCase
@@ -16,6 +18,9 @@ class SavedCocktailsViewModel(
     private val _favoriteList = MutableStateFlow<SavedCocktailsState>(SavedCocktailsState.Idle)
     val favoriteList: StateFlow<SavedCocktailsState> get() = _favoriteList
 
+    private val _errorMessage = MutableLiveData<String?>()
+    val errorMessage: LiveData<String?> get() = _errorMessage
+
     init {
         getData()
     }
@@ -23,6 +28,7 @@ class SavedCocktailsViewModel(
     private fun getData(){
         viewModelScope.launch {
             try {
+                _errorMessage.value = null
                 withContext(Dispatchers.IO){
                     getFavoriteCocktailListUseCase.invoke().collect { result->
                         _favoriteList.value = SavedCocktailsState.FavoriteList(result)
@@ -30,7 +36,7 @@ class SavedCocktailsViewModel(
                 }
 
             } catch(t:Throwable){
-
+                _errorMessage.value = "Error"
             }
         }
     }

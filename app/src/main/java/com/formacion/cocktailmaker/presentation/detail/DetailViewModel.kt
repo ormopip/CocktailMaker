@@ -21,9 +21,14 @@ class DetailViewModel(
     private val _ingredientInfo = MutableStateFlow<IngredientInfoState>(IngredientInfoState.Idle)
     val ingredientInfo: StateFlow<IngredientInfoState> get() = _ingredientInfo
 
+    private val _errorMessage = MutableLiveData<String?>()
+    val errorMessage: LiveData<String?> get() = _errorMessage
+
+
     fun getData(name: String){
         viewModelScope.launch {
             try {
+                _errorMessage.value = null
                 withContext(Dispatchers.IO){
                     getIngredientInfoUseCase.invoke(name).collect { result->
                         _ingredientInfo.value = IngredientInfoState.IngredientInfo(result)
@@ -31,7 +36,7 @@ class DetailViewModel(
                 }
 
             } catch(t:Throwable){
-
+                _errorMessage.value = "Error"
             }
         }
     }

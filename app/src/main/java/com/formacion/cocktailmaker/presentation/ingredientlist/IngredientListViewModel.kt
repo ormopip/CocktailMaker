@@ -19,8 +19,8 @@ class IngredientListViewModel(
     private val _ingredientList = MutableStateFlow<IngredientListState>(IngredientListState.Idle)
     val ingredientList: StateFlow<IngredientListState> get() = _ingredientList
 
-    private val _errorMessage = MutableLiveData<List<IngredientModel>>()
-    val errorMessage: LiveData<List<IngredientModel>> get() = _errorMessage
+    private val _errorMessage = MutableLiveData<String?>()
+    val errorMessage: LiveData<String?> get() = _errorMessage
 
     init {
         getData()
@@ -29,6 +29,7 @@ class IngredientListViewModel(
     private fun getData(){
         viewModelScope.launch {
             try {
+                _errorMessage.value = null
                 withContext(Dispatchers.IO){
                     getIngredientListUseCase.invoke().collect { result->
                         _ingredientList.value = IngredientListState.IngredientList(result)
@@ -36,7 +37,7 @@ class IngredientListViewModel(
                 }
 
             } catch(t:Throwable){
-
+                _errorMessage.value = "Error"
             }
         }
     }

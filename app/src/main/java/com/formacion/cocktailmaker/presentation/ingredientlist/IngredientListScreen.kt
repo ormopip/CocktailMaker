@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.formacion.cocktailmaker.components.ShowError
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -17,6 +18,7 @@ fun IngredientListScreen(
 
     if (errorState.value?.isNotEmpty() == true) {
         val error = errorState.value
+        ShowError(error = error?: "")
     }
 
     when(state.value) {

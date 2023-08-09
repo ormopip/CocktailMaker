@@ -1,5 +1,7 @@
 package com.formacion.cocktailmaker.presentation.cocktailgen
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.formacion.cocktailmaker.domain.model.CocktailModel
@@ -28,6 +30,9 @@ class CocktailRandomGeneratorViewModel (
     private val _favoriteCocktail = MutableStateFlow(false)
     val favoriteCocktail: StateFlow<Boolean> get() = _favoriteCocktail
 
+    private val _errorMessage = MutableLiveData<String?>()
+    val errorMessage: LiveData<String?> get() = _errorMessage
+
     init {
         getData()
     }
@@ -35,6 +40,7 @@ class CocktailRandomGeneratorViewModel (
     fun getData() {
         viewModelScope.launch {
             try {
+                _errorMessage.value = null
                 withContext(Dispatchers.IO) {
                     getRandomCocktailUseCase.invoke().collect { result ->
                         _randomCocktail.value = RandomCocktailState.RandomCocktail(result)
@@ -48,7 +54,7 @@ class CocktailRandomGeneratorViewModel (
                 }
 
             } catch (t: Throwable) {
-
+                _errorMessage.value = "Error"
             }
         }
     }
