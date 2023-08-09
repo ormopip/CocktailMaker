@@ -25,10 +25,10 @@ fun IngredientDetailScreen(
          ShowLoading()
       }
       is IngredientInfoState.IngredientInfo -> {
-         /*ShowIngredientInfo(
-            ingredient = (heroState.value as HeroDetailState.Hero).hero
+         ShowIngredientInfo(
+            ingredient = (detailState.value as IngredientInfoState.IngredientInfo).ingredientInfo
             // hero = heroState.value.hero
-         )*/
+         )
       }
    }
 

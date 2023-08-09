@@ -1,4 +1,4 @@
-package com.formacion.cocktailmaker.presentation.savedcocktails
+package com.formacion.cocktailmaker.presentation.favoritecocktails
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

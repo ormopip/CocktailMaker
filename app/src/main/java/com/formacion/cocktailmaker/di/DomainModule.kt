@@ -2,6 +2,7 @@ package com.formacion.cocktailmaker.di
 
 import com.formacion.cocktailmaker.domain.usecase.DeleteFavoriteCocktailUseCase
 import com.formacion.cocktailmaker.domain.usecase.GetFavoriteCocktailListUseCase
+import com.formacion.cocktailmaker.domain.usecase.GetIngredientInfoUseCase
 import com.formacion.cocktailmaker.domain.usecase.GetIngredientListUseCase
 import com.formacion.cocktailmaker.domain.usecase.GetRandomCocktailUseCase
 import com.formacion.cocktailmaker.domain.usecase.InsertFavoriteCocktailUseCase
@@ -13,4 +14,5 @@ val domainModule = module {
     single { GetFavoriteCocktailListUseCase(get()) }
     single { DeleteFavoriteCocktailUseCase(get()) }
     single { InsertFavoriteCocktailUseCase(get()) }
+    single { GetIngredientInfoUseCase(get()) }
 }

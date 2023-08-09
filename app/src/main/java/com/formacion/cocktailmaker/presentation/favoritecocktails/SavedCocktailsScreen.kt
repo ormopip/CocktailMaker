@@ -1,4 +1,4 @@
-package com.formacion.cocktailmaker.presentation.savedcocktails
+package com.formacion.cocktailmaker.presentation.favoritecocktails
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
