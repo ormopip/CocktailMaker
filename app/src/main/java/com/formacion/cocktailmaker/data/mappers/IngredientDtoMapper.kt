@@ -2,8 +2,10 @@ package com.formacion.cocktailmaker.data.mappers
 
 import com.formacion.cocktailmaker.data.local.model.CocktailLocal
 import com.formacion.cocktailmaker.data.remote.dto.IngredientDto
+import com.formacion.cocktailmaker.data.remote.dto.IngredientInfoDto
 import com.formacion.cocktailmaker.data.remote.dto.RandomCocktailDto
 import com.formacion.cocktailmaker.domain.model.CocktailModel
+import com.formacion.cocktailmaker.domain.model.IngredientInfoModel
 import com.formacion.cocktailmaker.domain.model.IngredientModel
 
 fun IngredientDto.toIngredientModel() = IngredientModel(
@@ -32,10 +34,37 @@ fun RandomCocktailDto.toCocktailModel(): CocktailModel {
         )
 }
 
+fun IngredientInfoDto.toIngredientInfoModel() = IngredientInfoModel(
+    id= id?:"",
+    name = name?:"?:",
+    description = description?:"",
+    type = type?:"",
+    alcohol = alcohol?:"",
+    abv = abv?:""
+)
+
 fun CocktailLocal.toCocktailModel() = CocktailModel(
-    id, name, category, alcoholic, glass, instructions, image, ingredients
+    id= id,
+    name = name,
+    category = category,
+    alcoholic = alcoholic,
+    glass = glass,
+    instructions = instructions,
+    image = image,
+    ingredients = ingredients.zip(measurements).toMap()
 )
 
 fun CocktailModel.toCocktailLocal() = CocktailLocal(
-    id, name, category, alcoholic, glass, instructions, image, ingredients, favorite = true
+    id,
+    name,
+    category,
+    alcoholic,
+    glass,
+    instructions,
+    image,
+    ingredients.keys.toList(),
+    ingredients.values.toList(),
+    favorite = true
 )
+
+

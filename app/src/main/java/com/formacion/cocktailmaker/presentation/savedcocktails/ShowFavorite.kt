@@ -1,4 +1,4 @@
-package com.formacion.cocktailmaker.presentation.common
+package com.formacion.cocktailmaker.presentation.savedcocktails
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -24,18 +24,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.viewinterop.AndroidView
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.formacion.cocktailmaker.R
-import com.formacion.cocktailmaker.domain.model.IngredientModel
+import com.formacion.cocktailmaker.domain.model.CocktailModel
 import com.formacion.cocktailmaker.presentation.theme.globalElevation
 import com.formacion.cocktailmaker.presentation.theme.globalPadding
 import com.formacion.cocktailmaker.presentation.theme.globalRoundedCornerShape
 
 @Composable
-fun ShowIngredient(
-    ingredient: IngredientModel,
+fun ShowFavorite(
+    favorite: CocktailModel,
     onClick: (() -> Unit)? = null
 ) {
 
@@ -46,25 +45,27 @@ fun ShowIngredient(
         ),
         shape = RoundedCornerShape(globalRoundedCornerShape)
     ) {
-        Column(
+        Row(
             modifier = Modifier
                 .padding(8.dp)
+                .fillMaxWidth()
                 .clickable {
                     onClick?.invoke()
                 },
-            horizontalAlignment = Alignment.CenterHorizontally
+            verticalAlignment = Alignment.CenterVertically
         ) {
             AsyncImage(
                 modifier = Modifier
-                    .size(80.dp)
+                    .size(100.dp)
                     .clip(CircleShape),
                 placeholder = painterResource(id = R.drawable.ball),
                 error = painterResource(id = R.drawable.ball),
                 model = ImageRequest.Builder(LocalContext.current)
-                    .data("https://www.thecocktaildb.com/images/ingredients/${ingredient.id}-Small.png")
+                    .data(favorite.image)
                     .build(), contentDescription = ""
             )
             Row(
+                modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Column(
@@ -72,7 +73,7 @@ fun ShowIngredient(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = ingredient.id,
+                        text = favorite.name,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -86,10 +87,6 @@ fun ShowIngredient(
 @Composable
 @Preview
 fun ShowIngredientPreview() {
-    ShowIngredient(
-        IngredientModel("dsfdf")
-    ) {
-        // Nothing todo here
-    }
+
 }
 

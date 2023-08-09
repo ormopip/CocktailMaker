@@ -13,6 +13,7 @@ data class CocktailLocal(
     @ColumnInfo(name = "glass") val glass: String,
     @ColumnInfo(name = "instructions") val instructions: String,
     @ColumnInfo(name = "image") val image: String,
-    @ColumnInfo(name = "ingredients") val ingredients: Map<String, String>,
+    @ColumnInfo(name = "ingredients") val ingredients: List<String>,
+    @ColumnInfo(name = "measurements") val measurements: List<String>,
     @ColumnInfo(name = "favorite") val favorite: Boolean
 )

@@ -42,7 +42,7 @@ val dataModule = module {
             .build()
     }
 
-    single<CocktailRepository> { CocktailRepositoryImpl(get()) }
+    single<CocktailRepository> { CocktailRepositoryImpl(get(), get()) }
 
     single<RemoteDataSource> { RemoteDataSourceImpl(get()) }
 

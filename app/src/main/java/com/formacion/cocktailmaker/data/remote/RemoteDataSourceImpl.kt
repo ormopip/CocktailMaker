@@ -1,6 +1,7 @@
 package com.formacion.cocktailmaker.data.remote
 
 import com.formacion.cocktailmaker.data.remote.dto.IngredientArrayDto
+import com.formacion.cocktailmaker.data.remote.dto.IngredientInfoArrayDto
 import com.formacion.cocktailmaker.data.remote.dto.RandomCocktailArrayDto
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -16,5 +17,9 @@ class RemoteDataSourceImpl (
     override suspend fun getRandomCocktail(): Flow<RandomCocktailArrayDto> = flow {
         // emit(cocktailApi.getIngredientList(SearchDto()))
         emit(cocktailApi.getRandomCocktail())
+    }
+
+    override suspend fun getIngredientInfo(name: String): Flow<IngredientInfoArrayDto> = flow {
+        emit(cocktailApi.getIngredientDetail(name))
     }
 }

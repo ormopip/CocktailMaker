@@ -1,6 +1,5 @@
-package com.formacion.cocktailmaker.presentation.list
+package com.formacion.cocktailmaker.presentation.ingredientlist
 
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.tooling.preview.Preview

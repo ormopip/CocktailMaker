@@ -1,6 +1,7 @@
 package com.formacion.cocktailmaker.data
 
 import com.formacion.cocktailmaker.domain.model.CocktailModel
+import com.formacion.cocktailmaker.domain.model.IngredientInfoModel
 import com.formacion.cocktailmaker.domain.model.IngredientModel
 import kotlinx.coroutines.flow.Flow
 
@@ -10,4 +11,5 @@ interface CocktailRepository {
     suspend fun getFavorites(): Flow<List<CocktailModel>>
     suspend fun insertFavorite(cocktailModel: CocktailModel)
     suspend fun deleteFavorite(cocktailModel: CocktailModel)
+    suspend fun getIngredientInfo(name: String): Flow<IngredientInfoModel>
 }

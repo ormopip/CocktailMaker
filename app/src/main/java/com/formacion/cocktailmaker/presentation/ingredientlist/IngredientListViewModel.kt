@@ -1,4 +1,4 @@
-package com.formacion.cocktailmaker.presentation.list
+package com.formacion.cocktailmaker.presentation.ingredientlist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

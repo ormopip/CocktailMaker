@@ -1,12 +1,15 @@
 package com.formacion.cocktailmaker.data
 
 import com.formacion.cocktailmaker.DataBuilders.CocktailDataBuilder
+import com.formacion.cocktailmaker.DataBuilders.IngredientInfoDataBuilder
 import com.formacion.cocktailmaker.data.local.LocalDataSource
 import com.formacion.cocktailmaker.data.mappers.toCocktailLocal
 import com.formacion.cocktailmaker.data.mappers.toCocktailModel
+import com.formacion.cocktailmaker.data.mappers.toIngredientInfoModel
 import com.formacion.cocktailmaker.data.mappers.toIngredientModel
 import com.formacion.cocktailmaker.data.remote.RemoteDataSource
 import com.formacion.cocktailmaker.domain.model.CocktailModel
+import com.formacion.cocktailmaker.domain.model.IngredientInfoModel
 import com.formacion.cocktailmaker.domain.model.IngredientModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -43,6 +46,12 @@ class CocktailRepositoryImpl(
 
     override suspend fun deleteFavorite(cocktailModel: CocktailModel) {
         localDataSource.deleteFavorite(cocktailModel.toCocktailLocal())
+    }
+
+    override suspend fun getIngredientInfo(name: String): Flow<IngredientInfoModel> {
+        return remoteDataSource.getIngredientInfo(name).map {
+                it?.ingredients?.first()?.toIngredientInfoModel()?:IngredientInfoDataBuilder().buildSingle()
+        }
     }
 }
 
