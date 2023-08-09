@@ -32,7 +32,7 @@ class CocktailRandomGeneratorViewModel (
         getData()
     }
 
-    private fun getData() {
+    fun getData() {
         viewModelScope.launch {
             try {
                 withContext(Dispatchers.IO) {

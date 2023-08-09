@@ -7,9 +7,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Checkbox
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -21,9 +21,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.semantics.clearAndSetSemantics
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -32,10 +29,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.formacion.cocktailmaker.R
-import com.formacion.cocktailmaker.domain.model.CocktailModel
 import com.formacion.cocktailmaker.domain.model.IngredientInfoModel
 import com.formacion.cocktailmaker.presentation.cocktailgen.CocktailRandomGeneratorViewModel
-import com.formacion.cocktailmaker.presentation.common.ShowCocktailIngredient
 import com.formacion.cocktailmaker.presentation.theme.globalPadding
 import org.koin.androidx.compose.koinViewModel
 
@@ -53,23 +48,24 @@ fun ShowIngredientInfo(
         modifier = Modifier
             .padding(
                 globalPadding
-            ),
+            )
+            .verticalScroll(rememberScrollState())
+        ,
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(modifier = Modifier.height(10.dp))
-       /* AsyncImage(
+        AsyncImage(
             modifier = Modifier
-                .size(300.dp)
+                .size(200.dp)
                 .clip(CircleShape),
             placeholder = painterResource(id = R.drawable.ball),
             error = painterResource(id = R.drawable.ball),
             model = ImageRequest.Builder(LocalContext.current)
-                .data(ingredient.image)
+                .data("https://www.thecocktaildb.com/images/ingredients/${ingredient.name}-Small.png")
                 .build(),
             contentDescription = "",
-
-            )*/
+            )
         Spacer(modifier = Modifier.height(10.dp))
         Column() {
             Text(
@@ -100,7 +96,6 @@ fun ShowIngredientInfo(
         )
     }
 }
-
 
 @Composable
 @Preview

@@ -17,7 +17,7 @@ fun NavigationGraph() {
             startDestination = BottomNavItem.IngredientList.screen_route,
         ) {
             addIngredientListScreen(navController)
-            addIngredientDetailScreen()
+            addIngredientDetailScreen(navController)
             addRandomCocktailScreen()
             addSavedCocktailsScreen()
         }

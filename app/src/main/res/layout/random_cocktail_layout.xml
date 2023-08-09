@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cocktailContainer"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:elevation="12dp"
+            app:cardCornerRadius="100dp"
+            android:layout_centerHorizontal="true"
+            android:innerRadius="0dp"
+            android:layout_marginTop="20dp"
+            android:shape="ring"
+            android:thicknessRatio="1.9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/cocktailImage"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/cocktail_image" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/cocktailName"
+            android:textColor="@color/TextColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="40sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cocktailContainer" />
+
+        <LinearLayout
+            android:id="@+id/buttonContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/cocktailName">
+
+        <Button
+            android:id="@+id/addFavoriteButton"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:drawableStart="@drawable/ic_favorite"
+            android:drawablePadding="5dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="40dp"
+            android:background = "@drawable/roundedbutton"/>
+
+            <Button
+                android:id="@+id/skipCocktailButton"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:drawableStart="@drawable/ic_new_cocktail"
+                android:drawablePadding="5dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="40dp"
+                android:layout_marginStart="20dp"
+                android:background = "@drawable/roundedbutton"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/categoryContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/buttonContainer">
+            <TextView
+                android:textColor="@color/TextColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text ="Category:"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/category"
+                android:textColor="@color/TextColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textSize="20sp"
+                tools:text ="cate" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/description"
+            android:textColor="@color/TextColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:gravity="center"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/categoryContainer" />
+
+
+        <androidx.compose.ui.platform.ComposeView
+            android:id = "@+id/ingredientsList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/description"
+            tools:itemCount="20"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

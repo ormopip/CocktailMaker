@@ -2,6 +2,7 @@ package com.formacion.cocktailmaker.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.formacion.cocktailmaker.presentation.cocktailgen.CocktailGeneratorScreen
 import com.formacion.cocktailmaker.presentation.ingredientlist.IngredientListScreen
@@ -28,12 +29,14 @@ fun NavGraphBuilder.addSavedCocktailsScreen() {
     }
 }
 
-fun NavGraphBuilder.addIngredientDetailScreen() {
+fun NavGraphBuilder.addIngredientDetailScreen(navController: NavHostController) {
     composable(
         route = Screen.IngredientDetailScreen.route + "/{ingredientId}",
         arguments = Screen.IngredientDetailScreen.arguments
     ) { navBackStackEntry ->
         val name = navBackStackEntry.arguments?.getString("ingredientId") ?: ""
-        IngredientDetailScreen(name = name)
+        IngredientDetailScreen(name = name){
+            navController.popBackStack()
+        }
     }
 }
