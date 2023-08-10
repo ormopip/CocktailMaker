@@ -10,12 +10,10 @@ class RemoteDataSourceImpl (
     private val cocktailApi: CocktailApi
 ) : RemoteDataSource {
     override suspend fun getIngredientList(): Flow<IngredientArrayDto> = flow {
-       // emit(cocktailApi.getIngredientList(SearchDto()))
         emit(cocktailApi.getIngredientList("list"))
     }
 
     override suspend fun getRandomCocktail(): Flow<RandomCocktailArrayDto> = flow {
-        // emit(cocktailApi.getIngredientList(SearchDto()))
         emit(cocktailApi.getRandomCocktail())
     }
 
