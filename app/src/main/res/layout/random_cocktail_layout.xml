@@ -60,14 +60,28 @@
             app:layout_constraintTop_toBottomOf="@id/cocktailName">
 
         <Button
-            android:id="@+id/addFavoriteButton"
+            android:id="@+id/addFavoriteButtonEmpty"
             android:layout_width="65dp"
             android:layout_height="65dp"
-            android:drawableStart="@drawable/ic_favorite"
+            android:drawableStart="@drawable/ic_favorite_empty"
             android:drawablePadding="5dp"
             android:paddingStart="20dp"
             android:paddingEnd="40dp"
+            android:visibility="visible"
             android:background = "@drawable/roundedbutton"/>
+
+            <Button
+                android:id="@+id/addFavoriteButtonFilled"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:drawableStart="@drawable/ic_favorite_fill"
+                android:drawablePadding="5dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="40dp"
+                android:visibility="gone"
+                android:background = "@drawable/roundedbutton"/>
+
+
 
             <Button
                 android:id="@+id/skipCocktailButton"

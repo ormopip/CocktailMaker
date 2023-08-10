@@ -44,16 +44,30 @@ class CocktailRandomGeneratorViewModel (
                 withContext(Dispatchers.IO) {
                     getRandomCocktailUseCase.invoke().collect { result ->
                         _randomCocktail.value = RandomCocktailState.RandomCocktail(result)
-                        getFavoriteCocktailListUseCase.invoke().collect { favorites ->
-                            val find = favorites.find {
-                                it.name == result.name
+                        getFavoriteCocktailListUseCase.invoke().collect { favoritesList ->
+                            val found = favoritesList.find { favorite ->
+                                (favorite.name.equals(result.name))
                             }
-                            if (find != null) _favoriteCocktail.value = true
+                            _favoriteCocktail.value = found!= null
                         }
                     }
                 }
 
             } catch (t: Throwable) {
+                _errorMessage.value = "Error"
+            }
+        }
+    }
+
+    fun checkFavorite(cocktail: CocktailModel) {
+        viewModelScope.launch {
+            try {
+                getFavoriteCocktailListUseCase.invoke().collect { favoritesList ->
+                    favoritesList.map { favorite ->
+                           if(favorite.name.equals(cocktail.name)) _favoriteCocktail.value = true
+                        }
+                    }
+                } catch (t: Throwable) {
                 _errorMessage.value = "Error"
             }
         }

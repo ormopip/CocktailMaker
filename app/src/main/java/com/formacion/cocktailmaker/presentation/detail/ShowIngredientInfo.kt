@@ -4,6 +4,9 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -11,7 +14,9 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -31,6 +36,7 @@ import coil.request.ImageRequest
 import com.formacion.cocktailmaker.R
 import com.formacion.cocktailmaker.domain.model.IngredientInfoModel
 import com.formacion.cocktailmaker.presentation.cocktailgen.CocktailRandomGeneratorViewModel
+import com.formacion.cocktailmaker.presentation.theme.Typography
 import com.formacion.cocktailmaker.presentation.theme.globalPadding
 import org.koin.androidx.compose.koinViewModel
 
@@ -40,60 +46,74 @@ fun ShowIngredientInfo(
     ingredient: IngredientInfoModel,
     viewModel: CocktailRandomGeneratorViewModel = koinViewModel()
 ) {
-    val favorite = viewModel.favoriteCocktail.collectAsStateWithLifecycle()
-
-    val checked = rememberSaveable() { mutableStateOf(favorite.value) }
-
-    Column(
+    Surface(
+        color = Color.Black,
+        contentColor = contentColorFor(Color.Black),
         modifier = Modifier
-            .padding(
-                globalPadding
-            )
+            .fillMaxHeight()
             .verticalScroll(rememberScrollState())
-        ,
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = Modifier.height(10.dp))
-        AsyncImage(
+        Column(
             modifier = Modifier
-                .size(200.dp)
-                .clip(CircleShape),
-            placeholder = painterResource(id = R.drawable.ball),
-            error = painterResource(id = R.drawable.ball),
-            model = ImageRequest.Builder(LocalContext.current)
-                .data("https://www.thecocktaildb.com/images/ingredients/${ingredient.name}-Small.png")
-                .build(),
-            contentDescription = "",
+                .padding(
+                    globalPadding
+                )
+                .fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Spacer(modifier = Modifier.height(10.dp))
+            AsyncImage(
+                modifier = Modifier
+                    .size(200.dp)
+                    .clip(CircleShape),
+                placeholder = painterResource(id = R.drawable.ball),
+                error = painterResource(id = R.drawable.ball),
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data("https://www.thecocktaildb.com/images/ingredients/${ingredient.name}-Small.png")
+                    .build(),
+                contentDescription = "",
             )
-        Spacer(modifier = Modifier.height(10.dp))
-        Column() {
-            Text(
-                color = Color.Black,
-                fontSize = 24.sp,
-                style = MaterialTheme.typography.h4,
-                text = ingredient.name
-            )
+            Spacer(modifier = Modifier.height(10.dp))
+            Column(
+                modifier = Modifier
+                    .padding(
+                        globalPadding
+                    )
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    color = Color.White,
+                    fontSize = 24.sp,
+                    style = Typography.titleLarge,
+                    text = ingredient.name
+                )
+
+                Text(
+                    color = Color.White,
+                    text = ingredient.description,
+                    fontSize = 18.sp,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(3.dp),
+                )
+
+                Text(
+                    color = Color.White,
+                    text = ingredient.alcohol,
+                    modifier = Modifier.padding(3.dp),
+                    style = MaterialTheme.typography.subtitle1
+                )
+
+                Text(
+                    color = Color.White,
+                    text = ingredient.type,
+                    modifier = Modifier.padding(3.dp),
+                    style = MaterialTheme.typography.subtitle1,
+                    textAlign = TextAlign.Center
+                )
+            }
         }
-
-        Text(
-            text = ingredient.description,
-            fontSize = 18.sp,
-            modifier = Modifier.padding(3.dp)
-        )
-
-        Text(
-            text = ingredient.alcohol,
-            modifier = Modifier.padding(3.dp),
-            style = MaterialTheme.typography.subtitle1
-        )
-
-        Text(
-            text = ingredient.type,
-            modifier = Modifier.padding(3.dp),
-            style = MaterialTheme.typography.subtitle1,
-            textAlign = TextAlign.Center
-        )
     }
 }
 

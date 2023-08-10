@@ -19,6 +19,9 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+
+        buildConfigField "String", "BASE_URL", "\"https://www.thecocktaildb.com/api/json/v1/1/\""
+
     }
 
     buildTypes {

@@ -36,7 +36,7 @@ fun RandomCocktailDto.toCocktailModel(): CocktailModel {
 
 fun IngredientInfoDto.toIngredientInfoModel() = IngredientInfoModel(
     id= id?:"",
-    name = name?:"?:",
+    name = name?:"",
     description = description?:"",
     type = type?:"",
     alcohol = alcohol?:"",

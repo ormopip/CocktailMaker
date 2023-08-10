@@ -26,6 +26,4 @@ data class RandomCocktailDto(
     @Json(name="strMeasure6") val measure6:String?,
     @Json(name="strMeasure7") val measure7:String?,
     @Json(name="strMeasure8") val measure8:String?,
-
-
 )

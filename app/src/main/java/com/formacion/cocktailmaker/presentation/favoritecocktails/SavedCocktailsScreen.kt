@@ -3,6 +3,7 @@ package com.formacion.cocktailmaker.presentation.favoritecocktails
 import android.annotation.SuppressLint
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -15,6 +16,10 @@ fun SavedCocktailsScreen(
     viewModel: SavedCocktailsViewModel = koinViewModel()
 ) {
     val state = viewModel.favoriteList.collectAsStateWithLifecycle()
+
+    LaunchedEffect(Unit){
+        viewModel.getData()
+    }
 
     val errorState = viewModel.errorMessage.observeAsState()
 

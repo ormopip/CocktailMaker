@@ -1,6 +1,6 @@
 package com.formacion.cocktailmaker.data
 
-import com.formacion.cocktailmaker.DataBuilders.CocktailDataBuilder
+import com.formacion.cocktailmaker.DataBuilders.CocktailModelDataBuilder
 import com.formacion.cocktailmaker.DataBuilders.IngredientInfoDataBuilder
 import com.formacion.cocktailmaker.data.local.LocalDataSource
 import com.formacion.cocktailmaker.data.mappers.toCocktailLocal
@@ -28,7 +28,7 @@ class CocktailRepositoryImpl(
 
     override suspend fun getRandomCocktail(): Flow<CocktailModel> {
         return remoteDataSource.getRandomCocktail().map {
-            it?.cocktailList?.first()?.toCocktailModel()?: CocktailDataBuilder().buildSingle()
+            it?.cocktailList?.first()?.toCocktailModel()?: CocktailModelDataBuilder().buildSingle()
             }
         }
 

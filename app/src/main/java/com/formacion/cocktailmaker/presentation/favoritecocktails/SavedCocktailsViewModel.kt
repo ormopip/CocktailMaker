@@ -1,5 +1,6 @@
 package com.formacion.cocktailmaker.presentation.favoritecocktails
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -21,11 +22,7 @@ class SavedCocktailsViewModel(
     private val _errorMessage = MutableLiveData<String?>()
     val errorMessage: LiveData<String?> get() = _errorMessage
 
-    init {
-        getData()
-    }
-
-    private fun getData(){
+    fun getData(){
         viewModelScope.launch {
             try {
                 _errorMessage.value = null
@@ -34,7 +31,7 @@ class SavedCocktailsViewModel(
                         _favoriteList.value = SavedCocktailsState.FavoriteList(result)
                     }
                 }
-
+            Log.d("test-getdata", "mensaje")
             } catch(t:Throwable){
                 _errorMessage.value = "Error"
             }

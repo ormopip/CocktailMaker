@@ -8,11 +8,11 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun CocktailGeneratorScreen(
-    cocktailRandomGeneratorViewModel: CocktailRandomGeneratorViewModel = koinViewModel()
+    viewModel: CocktailRandomGeneratorViewModel = koinViewModel()
 ) {
-    val state = cocktailRandomGeneratorViewModel.randomCocktail.collectAsStateWithLifecycle()
+    val state = viewModel.randomCocktail.collectAsStateWithLifecycle()
 
-    val errorState = cocktailRandomGeneratorViewModel.errorMessage.observeAsState()
+    val errorState = viewModel.errorMessage.observeAsState()
 
     if (errorState.value?.isNotEmpty() == true) {
         val error = errorState.value

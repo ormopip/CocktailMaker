@@ -2,7 +2,7 @@ package com.formacion.cocktailmaker.DataBuilders
 
 import com.formacion.cocktailmaker.domain.model.CocktailModel
 
-class CocktailDataBuilder {
+class CocktailModelDataBuilder {
     val id= "test-id"
     var name = "cocktail-name"
     var category= "category"
@@ -23,7 +23,7 @@ class CocktailDataBuilder {
         ingredients = ingredients
     )
 
-    fun withName(name: String): CocktailDataBuilder {
+    fun withName(name: String): CocktailModelDataBuilder {
         this.name = name
         return this
     }

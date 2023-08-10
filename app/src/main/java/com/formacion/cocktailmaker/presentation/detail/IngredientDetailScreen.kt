@@ -13,6 +13,7 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -42,8 +43,9 @@ fun IngredientDetailScreen(
    Scaffold(
       topBar = {
       TopAppBar (
+         backgroundColor = Color.Black,
          title = {
-            Text("Detalle de ${name}")
+            Text("Detalle de ${name}", color = Color.White)
          },
          navigationIcon = {
             IconButton(
@@ -52,7 +54,7 @@ fun IngredientDetailScreen(
                },
                onClick = onBack
             ) {
-               Icon(Icons.Filled.ArrowBack, null)
+               Icon(Icons.Filled.ArrowBack, null, tint = Color.White)
             }
          }
       )

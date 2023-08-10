@@ -1,4 +1,4 @@
-package com.formacion.cocktailmaker.presentation.common
+package com.formacion.cocktailmaker.presentation.cocktailgen
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -36,7 +36,6 @@ fun ShowCocktailIngredient(
     ingredient: String,
     measure: String
 ) {
-
     Card(
         modifier = Modifier.padding(globalPadding),
         elevation = CardDefaults.cardElevation(

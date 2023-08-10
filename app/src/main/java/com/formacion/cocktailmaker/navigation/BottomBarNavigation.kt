@@ -24,8 +24,8 @@ fun BottomNavigation(navController: NavController) {
         BottomNavItem.SavedCocktails
     )
     BottomNavigation(
-        backgroundColor = colorResource(id = R.color.teal_200),
-        contentColor = Color.Black
+        backgroundColor = colorResource(id = R.color.black),
+        contentColor = Color.White
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
@@ -33,10 +33,11 @@ fun BottomNavigation(navController: NavController) {
             BottomNavigationItem(
                 icon = { Icon(painterResource(id = item.icon), contentDescription = item.title)  },
                 label = { Text(text = item.title,
-                    fontSize = 9.sp) },
+                    fontSize = 9.sp,
+                color = Color.White) },
                 alwaysShowLabel = true,
-                selectedContentColor = Color.White,
-                unselectedContentColor = Color.Black.copy(0.4f),
+                selectedContentColor = Color.Cyan,
+                unselectedContentColor = Color.LightGray.copy(0.4f),
                 selected = currentRoute == item.screen_route,
                 onClick = {
                     navController.navigate(item.screen_route) {
