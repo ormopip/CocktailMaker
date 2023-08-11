@@ -26,6 +26,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -71,7 +73,7 @@ fun ShowIngredientInfo(
                 model = ImageRequest.Builder(LocalContext.current)
                     .data("https://www.thecocktaildb.com/images/ingredients/${ingredient.name}-Small.png")
                     .build(),
-                contentDescription = "",
+                contentDescription = "${ingredient.name} image",
             )
             Spacer(modifier = Modifier.height(10.dp))
             Column(
@@ -86,7 +88,10 @@ fun ShowIngredientInfo(
                     color = Color.White,
                     fontSize = 24.sp,
                     style = Typography.titleLarge,
-                    text = ingredient.name
+                    text = ingredient.name,
+                    modifier = Modifier.semantics {
+                        contentDescription = ingredient.name
+                    }
                 )
 
                 Text(
@@ -95,20 +100,24 @@ fun ShowIngredientInfo(
                     fontSize = 18.sp,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(3.dp),
+                        .padding(3.dp)
+                        .semantics { contentDescription = ingredient.description },
+
                 )
 
                 Text(
                     color = Color.White,
                     text = ingredient.alcohol,
-                    modifier = Modifier.padding(3.dp),
+                    modifier = Modifier.padding(3.dp)
+                        .semantics { contentDescription = ingredient.alcohol },
                     style = MaterialTheme.typography.subtitle1
                 )
 
                 Text(
                     color = Color.White,
                     text = ingredient.type,
-                    modifier = Modifier.padding(3.dp),
+                    modifier = Modifier.padding(3.dp)
+                        .semantics { contentDescription = ingredient.type },
                     style = MaterialTheme.typography.subtitle1,
                     textAlign = TextAlign.Center
                 )
