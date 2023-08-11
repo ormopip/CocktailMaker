@@ -18,6 +18,7 @@ class CocktailRepositoryImpl(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource
 ) : CocktailRepository {
+
     override suspend fun getIngredientList(): Flow<List<IngredientModel>> {
         return remoteDataSource.getIngredientList().map {
             it?.ingredients?.map { ingredient ->
